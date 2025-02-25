@@ -3,10 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <script src="main.js">game</script>
+    <h1>Rock Paper Scissors</h1>
+    
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    
+    <p id="result"></p>
+
+    <script>
+        function getComputerChoice() {
+            let number = Math.random();
+            if (number > 0.34 && number <= 0.67) {
+                return "scissors";
+            } else if (number <= 0.34) {
+                return "rock";
+            } else {
+                return "paper";
+            }
+        }
+
+        function playRound(humanChoice, computerChoice) {
+            if (humanChoice === computerChoice) {
+                return "It's a Draw!";
+            } else if (
+                (humanChoice === 'rock' && computerChoice === 'scissors') ||
+                (humanChoice === 'scissors' && computerChoice === 'paper') ||
+                (humanChoice === 'paper' && computerChoice === 'rock')
+            ) {
+                return "You win!";
+            } else {
+                return "You lose!";
+            }
+        }
+
+        function handleClick(choice) {
+            const computerChoice = getComputerChoice();
+            const result = playRound(choice, computerChoice);
+            document.getElementById("result").textContent = 
+                `You chose: ${choice} | Computer chose: ${computerChoice} → ${result}`;
+        }
+
+        document.getElementById("rock").addEventListener("click", () => handleClick("rock"));
+        document.getElementById("paper").addEventListener("click", () => handleClick("paper"));
+        document.getElementById("scissors").addEventListener("click", () => handleClick("scissors"));
+    </script>
 </body>
 </html>
